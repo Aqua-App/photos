@@ -1,4 +1,4 @@
-# Aqubnb-photos
+# Photos Service
 
 > Photo layout and carousel modal
 
@@ -25,9 +25,9 @@
 
 ## Requirements
 
-* Node / Express
+* Node / NPM
 * MySQL
-* JS / React
+* JS
 
 ## Dependencies
 
