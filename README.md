@@ -3,15 +3,15 @@
 Photo layout and carousel modal, meant to display real estate
 rental listing for potential renters.
 
-![Photos-Grid](README_images/service_final.PNG)
-![Photos-Modal](README_images/service_modal_final.PNG)
-
 ## Table of Contents
 
 1. [Related Projects](#Related-Projects)
 1. [Usage](#Usage)
 1. [Requirements](#requirements)
 1. [Dependencies](#Dependencies)
+
+![Photos-Grid](README_images/service_final.PNG)
+![Photos-Modal](README_images/service_modal_final.PNG)
 
 ## Related Projects
 
@@ -30,8 +30,14 @@ rental listing for potential renters.
 
 ## Requirements
 
+<<<<<<< HEAD
 * Node >=6.13.0
 * MySQL
+=======
+* Node / NPM
+* MySQL
+* JS
+>>>>>>> 3b45ed6913bed729a85fb93ad7a1eeb7c96ce380
 
 ## Dependencies
 
