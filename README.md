@@ -30,14 +30,8 @@ rental listing for potential renters.
 
 ## Requirements
 
-<<<<<<< HEAD
 * Node >=6.13.0
 * MySQL
-=======
-* Node / NPM
-* MySQL
-* JS
->>>>>>> 3b45ed6913bed729a85fb93ad7a1eeb7c96ce380
 
 ## Dependencies
 
