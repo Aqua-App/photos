@@ -1,7 +1,5 @@
-const {React} = window;
-const {ReactDOM} = window;
-const {styled} = window;
-const {useEffect, useState} = React;
+import React from 'react';
+import styled from 'styled-components';
 
 const LinksCont = styled.div`
   display: flex;

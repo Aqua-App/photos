@@ -1,6 +1,5 @@
-const {React} = window;
-const {ReactDOM} = window;
-const {styled} = window;
+import React from 'react';
+import styled from 'styled-components';
 const {useEffect, useState} = React;
 import Modal from './Modal.jsx';
 

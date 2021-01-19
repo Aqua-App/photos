@@ -1,8 +1,6 @@
-const {React} = window;
-const {ReactDOM} = window;
-const {styled} = window;
+import React from 'react';
+import styled, {keyframes} from 'styled-components';
 const {useEffect, useState} = React;
-const {keyframes} = styled;
 
 const fadeIn = keyframes`
   from {
@@ -32,7 +30,7 @@ const Images = styled.div`
 Images.displayName = 'Images';
 
 const Image = styled.img`
-  display: ${props => props.display ? 'inline' : 'none'};
+  display: ${props => props.view ? 'inline' : 'none'};
   animation: ${fadeIn} 200ms linear;
   position: absolute;
   height: 100%;
@@ -86,7 +84,7 @@ const Carousel = ({ photoList, photoNum, setPhotoNum}) => {
               key={i}
               src={photo.url}
               alt={photo.description}
-              display={i + 1 === photoNum}
+              view={i + 1 === photoNum}
             />)
         })}
       </Images>

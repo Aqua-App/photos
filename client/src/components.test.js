@@ -1,10 +1,11 @@
 import React from 'react';
-import { shallow, mount, render } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import App from './components/App.jsx';
 import Links from './components/Links.jsx';
 import Photos from './components/Photos.jsx';
 import Modal from './components/Modal.jsx';
 import Carousel from './components/Carousel.jsx';
+
 
 describe('Links Component', () => {
   it('Links should have access to the listing object', () => {
@@ -56,15 +57,22 @@ describe('Photos Component', () => {
 
   it('AllPhotosBtn should toggle the view of the Modal', () => {
     expect(wrapper.find('Modal').prop('view')).toBe(false);
-    wrapper.find('AllPhotosBtn').simulate('click');
+    wrapper.find('AllPhotosBtn').simulate('click', { target: {}});
     expect(wrapper.find('Modal').prop('view')).toBe(true);
+    expect(wrapper.find('Modal').prop('startPic')).toBe(1);
+    wrapper.find('AllPhotosBtn').simulate('click', { target: {}});
+  });
+
+  it('Clicking on a photo should toggle the view of the Modal with respective photo', () => {
+    expect(wrapper.find('Modal').prop('view')).toBe(false);
+    wrapper.find('PhotosCont').simulate('click', { target: { id: 4 } });
+    expect(wrapper.find('Modal').prop('view')).toBe(true);
+    expect(wrapper.find('Modal').prop('startPic')).toBe(5);
   });
 });
 
 describe('Carousel Component', () => {
-  var modal = shallow(<Modal photoList={photoList} view={true} />);
-  var photoNum = modal.find('Carousel').prop('photoNum');
-  var carousel = shallow(<Carousel photoList={photoList} photoNum={photoNum} />)
+  var carousel = shallow(<Carousel photoList={photoList} photoNum={1}/>);
 
   it('Should have photoList length "n" images', () => {
     var images = carousel.find('Images').children();
@@ -72,18 +80,13 @@ describe('Carousel Component', () => {
   });
 
   it('Should display the image that photoNum matches', () => {
-    var firstImg = carousel.find('Images').children().at(photoNum - 1);
-    expect(firstImg.prop('display')).toBe(true);
+    var firstImg = carousel.find('Images').children().at(0);
+    expect(firstImg.prop('view')).toBe(true);
   });
 
-  it('Should increment/decrement photoNum when clicking NavBtns', () => {
-    var secondImg = carousel.find('Images').children().at(1);
-    expect(secondImg.prop('display')).toBe(false);
-
-    carousel.find('NavBtns').at(1).simulate('click', { target: { value: 'right' } });
-    secondImg = carousel.find('Images').children().at(1);
-    expect(secondImg.prop('display')).toBe(true);
-
+  it('Should hide nav buttons when reaching end or start of carousel', () => {
+    carousel = shallow(<Carousel photoList={photoList} photoNum={6} />);
+    expect(carousel.find('NavBtns').at(1).prop('visible')).toBe(false);
   });
 });
 

@@ -1,8 +1,6 @@
-const {React} = window;
-const {ReactDOM} = window;
-const {styled} = window;
+import React from 'react';
+import styled, {keyframes} from 'styled-components';
 const {useEffect, useState} = React;
-const {keyframes} = styled;
 import Carousel from './Carousel.jsx';
 
 const slideUpWithFade = keyframes`
@@ -20,12 +18,12 @@ const slideUpWithFade = keyframes`
 const ModalCont = styled.div`
   display: ${props => props.view ? 'flex' : 'none'};
   flex-direction: column;
-  position: absolute;
+  position: fixed;
   z-index: 100;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100%;
+  width: 100%;
+  height: 100vh;
   background-color: white;
   animation: ${slideUpWithFade} 400ms linear;
 `;
@@ -93,7 +91,7 @@ const Modal = ({ photoList, view, toggle, startPic}) => {
           <ion-icon style={{fontSize:20}} name="close-outline"></ion-icon>
           <div style={{marginLeft:5}}>Close</div>
         </CloseBtn>
-        <div>{photoNum} / {photoList.length}</div>
+        <div id='photoNumNav'>{photoNum} / {photoList.length}</div>
         <div>
           <Link>
             <ion-icon name="cloud-upload-outline"></ion-icon>
