@@ -7,6 +7,10 @@ const LinksCont = styled.div`
   justify-content: space-between;
   margin-bottom: 18px;
   height: 30px;
+
+  @media screen and (max-width: 500px) {
+    justify-content: center;
+  }
 `;
 
 const Link = styled.div`

@@ -1,9 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 const {useEffect, useState} = React;
 import Links from './Links.jsx';
 import Photos from './Photos.jsx';
 import axios from 'axios';
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+  }
+`;
 
 const Container = styled.section`
   font-family: 'Montserrat', Helvetica, sans-serif;
@@ -12,10 +18,18 @@ const Container = styled.section`
   font-size: 16px;
   width: 1128px;
   margin: 0 auto;
+
+  @media screen and (max-width: 500px) {
+    width: 100vw;
+  }
 `;
 
 const Header = styled.h1`
   margin-bottom: 10px;
+
+  @media screen and (max-width: 500px) {
+    text-align: center;
+  }
 `;
 
 const App = () => {
@@ -37,6 +51,7 @@ const App = () => {
 
     return (
     <>
+      <GlobalStyle />
       {photos.length !== 0 &&
         <Container>
           <Header>{photos[0].Listing.name} ({photos[0].ListingId})</Header>

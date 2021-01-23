@@ -17,8 +17,9 @@ app.get('/api/homes/:id/photos', (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      res.statusCode(404).end();
+      res.sendStatus(404).end();
     });
 });
+
 
 module.exports = app;

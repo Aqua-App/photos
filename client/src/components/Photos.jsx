@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-const {useEffect, useState} = React;
+const { useState } = React;
 import Modal from './Modal.jsx';
 
 const PhotosCont = styled.div`
@@ -13,6 +13,14 @@ const PhotosCont = styled.div`
   overflow: hidden;
   grid-template-columns: 50% 1fr 1fr;
   grid-template-rows: 1fr 1fr;
+
+  @media screen and (max-width: 500px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    border-radius: 0px;
+    width: 100vw;
+    margin: 0 auto;
+  }
 `;
 PhotosCont.displayName = 'PhotosCont';
 
@@ -22,6 +30,10 @@ const ImgCont = styled.div`
   background-color: black;
   overflow: hidden;
   cursor: pointer;
+
+  @media screen and (max-width: 500px) {
+    grid-area: 1 / 1 / 2 / 2;
+  }
 `;
 ImgCont.displayName = 'ImgCont';
 
