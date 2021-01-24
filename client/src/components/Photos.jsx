@@ -79,20 +79,21 @@ const AllPhotosBtn = styled.button`
 `;
 AllPhotosBtn.displayName = 'AllPhotosBtn';
 
-var getGridLoc = (index) => {
-  switch (index) {
-    case 0: return '1 / 1 / 3 / 2';
-    case 1: return '1 / 2 / 2 / 3';
-    case 2: return '1 / 3 / 2 / 4';
-    case 3: return '2 / 2 / 3 / 3';
-    case 4: return '2 / 3 / 3 / 4';
-  }
-};
 
 
 const Photos = ({ photoList }) => {
   const [modalView, setModalView] = useState(false);
   const [startPic, setStartPic] = useState(1);
+
+  var getGridLoc = (index) => {
+    switch (index) {
+      case 0: return '1 / 1 / 3 / 2';
+      case 1: return '1 / 2 / 2 / 3';
+      case 2: return '1 / 3 / 2 / 4';
+      case 3: return '2 / 2 / 3 / 3';
+      case 4: return '2 / 3 / 3 / 4';
+    }
+  };
 
   var toggle = (e) => {
     if (e.target.id) {
@@ -102,6 +103,7 @@ const Photos = ({ photoList }) => {
     }
     setModalView(!modalView);
   };
+
 
   return (
     <>
@@ -118,11 +120,10 @@ const Photos = ({ photoList }) => {
           <div style={{marginLeft: 8}}> Show All Photos </div>
         </AllPhotosBtn>
       </PhotosCont>
-      <Modal
-        photoList={photoList}
-        view={modalView}
-        toggle={toggle}
-        startPic={startPic}/>
+      {modalView && <Modal
+          photoList={photoList}
+          toggle={toggle}
+          startPic={startPic}/>}
     </>
   )
 };

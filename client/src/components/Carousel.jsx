@@ -34,7 +34,7 @@ const Image = styled.img`
   animation: ${fadeIn} 200ms linear;
   position: absolute;
   height: 100%;
-  width 100%;
+  width: 100%;
 `;
 
 const NavBtns = styled.button`

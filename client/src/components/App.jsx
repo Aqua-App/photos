@@ -19,7 +19,7 @@ const Container = styled.section`
   width: 1128px;
   margin: 0 auto;
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 1000px) {
     width: 100vw;
   }
 `;

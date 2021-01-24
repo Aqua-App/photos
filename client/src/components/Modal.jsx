@@ -2,6 +2,7 @@ import React from 'react';
 import styled, {keyframes} from 'styled-components';
 const {useEffect, useState} = React;
 import Carousel from './Carousel.jsx';
+import PhotoGrid from './PhotoGrid.jsx';
 
 const slideUpWithFade = keyframes`
   from {
@@ -16,16 +17,21 @@ const slideUpWithFade = keyframes`
 `;
 
 const ModalCont = styled.div`
-  display: ${props => props.view ? 'flex' : 'none'};
+  display: flex;
   flex-direction: column;
   position: fixed;
   z-index: 100;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100vh;
+  width: 100vw;
+  height: 100%;
+  max-height: 100%;
   background-color: white;
   animation: ${slideUpWithFade} 400ms linear;
+
+  @media screen and (max-width: 550px) {
+    height: auto;
+  }
 `;
 
 const ModalNav = styled.section`
@@ -33,6 +39,10 @@ const ModalNav = styled.section`
   justify-content: space-between;
   align-items: center;
   margin: 40px 40px 20px 40px;
+
+  @media screen and (max-width: 550px) {
+    margin-top: 20px;
+  }
 `;
 
 const CloseBtn = styled.button`
@@ -77,21 +87,49 @@ const Link = styled.div`
   }
 `;
 
-const Modal = ({ photoList, view, toggle, startPic}) => {
+const Modal = ({ photoList, toggle, startPic}) => {
+  const initialWidth = window.innerWidth > 500 ? 'big' : 'small';
   const [photoNum, setPhotoNum] = useState(1);
+  const [screenWidth, setScreenWidth] = useState(initialWidth);
+  const focus = React.createRef();
+
+  function photosView() {
+    if (screenWidth === 'big') {
+      return <Carousel photoList={photoList} photoNum={photoNum} setPhotoNum={setPhotoNum}/>
+    } else if (screenWidth === 'small') {
+      return <PhotoGrid photoList={photoList}/>
+    }
+  }
+
+  function screenWidthHandler() {
+    var width = window.innerWidth
+    if (width => 550 && width <= 600) {
+      setScreenWidth('big');
+    }
+    if (width <= 500) {
+      setScreenWidth('small');
+    }
+  }
 
   useEffect(() => {
     setPhotoNum(startPic);
-  }, [view]);
+    focus.current.focus();
+    window.addEventListener('resize', screenWidthHandler);
+
+    return function() {
+      window.removeEventListener('resize', screenWidthHandler);
+    }
+  }, []);
 
   return (
-    <ModalCont view={view}>
+    <ModalCont ref={focus}>
       <ModalNav>
         <CloseBtn onClick={toggle}>
           <ion-icon style={{fontSize:20}} name="close-outline"></ion-icon>
           <div style={{marginLeft:5}}>Close</div>
         </CloseBtn>
-        <div id='photoNumNav'>{photoNum} / {photoList.length}</div>
+        { window.innerWidth > 500 &&
+        <div id='photoNumNav'>{photoNum} / {photoList.length}</div> }
         <div>
           <Link>
             <ion-icon name="cloud-upload-outline"></ion-icon>
@@ -101,7 +139,7 @@ const Modal = ({ photoList, view, toggle, startPic}) => {
           </Link>
         </div>
       </ModalNav>
-      {view && <Carousel photoList={photoList} photoNum={photoNum} setPhotoNum={setPhotoNum}/>}
+      { photosView() }
     </ModalCont>
   )
 };
